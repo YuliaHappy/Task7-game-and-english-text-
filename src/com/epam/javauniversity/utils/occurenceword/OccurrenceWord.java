@@ -1,5 +1,9 @@
 package com.epam.javauniversity.utils.occurenceword;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,4 +27,22 @@ public final class OccurrenceWord {
         }
         return occurrenceWord;
     }
+
+    public static Map<String, Integer> getFrequencyWord(InputStream inputStream) throws IOException {
+        BufferedReader reader = null;
+        String text = "";
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String str;
+            while ((str = reader.readLine()) != null) {
+                text += str + "\n";
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+            return getFrequencyWord(text);
+        }
+    }
+
 }
